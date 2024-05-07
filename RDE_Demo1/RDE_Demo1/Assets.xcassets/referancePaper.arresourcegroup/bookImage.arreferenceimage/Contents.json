@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "bookImage.heic",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "unit" : "inches",
+    "width" : 5.6414253897550113
+  }
+}
