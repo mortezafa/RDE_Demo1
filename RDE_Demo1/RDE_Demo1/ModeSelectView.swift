@@ -15,26 +15,28 @@ struct ModeSelectView: View {
 
     var body: some View {
 
-        Button("Add Note") {
-            noteVisible.toggle()
+        VStack {
+            Button(noteVisible ? "Remove Note" : "Add Note") {
+                noteVisible.toggle()
+            }
+            .padding()
+            .background(noteVisible ? Color.green : Color.gray)
+            .foregroundColor(.white)
+            .clipShape(Capsule())
+            .offset(z: -0.5)
+            .offset(y: -1000)
         }
-        .padding()
-        .background(noteVisible ? Color.green : Color.gray)
-        .foregroundColor(.white)
-        .clipShape(Capsule())
-        .padding(.bottom, 500)
-        Spacer()
 
 
         RealityView { content, attachments in
-            let mesh = MeshResource.generatePlane(width: 0.1524, height: 0.2032)
+            let mesh = MeshResource.generatePlane(width: 0.15748, height: 0.2286)
             let color = UIColor.clear
             let material = SimpleMaterial(color: color, isMetallic: false)
             contentEntity = ModelEntity(mesh: mesh, materials: [material])
             content.add(contentEntity!)
 
             if let note = attachments.entity(for: "NoteTitle") {
-                note.position = [0, -0.15, 0.05]
+                note.position = [0, -0.1, 0.03]
                 contentEntity!.addChild(note)
 
             }
@@ -44,8 +46,7 @@ struct ModeSelectView: View {
                 if noteVisible {
                     VStack {
                         TextEditor(text: $noteText)
-                            .padding()
-                    }.frame(width: 200, height: 100)
+                    }.frame(width: 250, height: 100)
                         .background(.thinMaterial)
                         .clipShape(RoundedRectangle(cornerRadius: 6))
                 }
@@ -61,7 +62,7 @@ struct ModeSelectView: View {
     }
 
     func loadImage() async {
-        let uiImage = UIImage(named: "bookImage")
+        let uiImage = UIImage(named: "bigNate")
         let cgImage = uiImage?.cgImage
         let referenceImage = ReferenceImage(cgimage: cgImage!, physicalSize: CGSize(width: 1920, height: 1005))
         imageTrackingProvider = ImageTrackingProvider(
@@ -97,10 +98,12 @@ struct ModeSelectView: View {
                 contentEntity!.isEnabled = true
             }
             let transform = Transform(matrix: anchor.originFromAnchorTransform)
-            let initialRotation = simd_quatf(angle: .pi / 2, axis: [0, 1, 0])
+            let additionalRotation = simd_quatf(angle: .pi / 2, axis: [0, 1, 0])
+            let initialRotation = simd_quatf(angle: (3 * .pi)/2, axis: [0, 1, 0])
+            let combinedRotation = additionalRotation * initialRotation
 
             entityMap[anchor.id]?.transform.translation = transform.translation
-            entityMap[anchor.id]?.transform.rotation = initialRotation
+            entityMap[anchor.id]?.transform.rotation = combinedRotation
         } else {
             contentEntity!.isEnabled = false
         }

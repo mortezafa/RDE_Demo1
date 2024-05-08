@@ -15,6 +15,7 @@
 		7C54D2052BD71AD000718D73 /* RDE_Demo1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54D2042BD71AD000718D73 /* RDE_Demo1Tests.swift */; };
 		7C54D20F2BD7227D00718D73 /* TextWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54D20E2BD7227D00718D73 /* TextWindowView.swift */; };
 		7C6CE9E82BE93B9A00259BD3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CE9E72BE93B9A00259BD3 /* MainView.swift */; };
+		7CAB03322BEAB05C00123D64 /* ControlPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAB03312BEAB05C00123D64 /* ControlPanelView.swift */; };
 		7CB139E82BE576380022C03F /* ImageTrackingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB139E72BE576380022C03F /* ImageTrackingModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		7C54D2042BD71AD000718D73 /* RDE_Demo1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RDE_Demo1Tests.swift; sourceTree = "<group>"; };
 		7C54D20E2BD7227D00718D73 /* TextWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWindowView.swift; sourceTree = "<group>"; };
 		7C6CE9E72BE93B9A00259BD3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		7CAB03312BEAB05C00123D64 /* ControlPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelView.swift; sourceTree = "<group>"; };
 		7CB139E72BE576380022C03F /* ImageTrackingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTrackingModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				7C54D20E2BD7227D00718D73 /* TextWindowView.swift */,
+				7CAB03312BEAB05C00123D64 /* ControlPanelView.swift */,
 				7C54D1F22BD71ACF00718D73 /* RDE_Demo1App.swift */,
 				7C54D1F42BD71ACF00718D73 /* ModeSelectView.swift */,
 				7C6CE9E72BE93B9A00259BD3 /* MainView.swift */,
@@ -226,6 +229,7 @@
 				7C54D1F52BD71ACF00718D73 /* ModeSelectView.swift in Sources */,
 				7CB139E82BE576380022C03F /* ImageTrackingModel.swift in Sources */,
 				7C54D1F32BD71ACF00718D73 /* RDE_Demo1App.swift in Sources */,
+				7CAB03322BEAB05C00123D64 /* ControlPanelView.swift in Sources */,
 				7C6CE9E82BE93B9A00259BD3 /* MainView.swift in Sources */,
 				7C54D20F2BD7227D00718D73 /* TextWindowView.swift in Sources */,
 			);

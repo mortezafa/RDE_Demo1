@@ -13,14 +13,14 @@ struct MainView: View {
 
     var body: some View {
         VStack {
-            Model3D(named: "toy_biplane_idle")
-                .padding(.bottom, 50)
-
             Text("RDE Demo 1")
+                .font(.title3)
 
             Toggle("Immersive Space", isOn: $showImmersiveSpace)
                 .toggleStyle(.button)
                 .padding(.top, 50)
+
+            
         }
         .padding()
         .onChange(of: showImmersiveSpace) { _, newValue in

@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "bookImage.heic",
+      "filename" : "bigNate.heic",
       "idiom" : "universal"
     }
   ],
@@ -11,6 +11,6 @@
   },
   "properties" : {
     "unit" : "inches",
-    "width" : 6.4500000000000002
+    "width" : 6.0956662354463136
   }
 }
