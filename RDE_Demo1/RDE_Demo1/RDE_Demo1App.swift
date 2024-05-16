@@ -3,7 +3,6 @@ import ARKit
 
 @main
 struct MyApp: App {
-    @State private var immersionStyle: ImmersionStyle = .mixed
     var body: some Scene {
         WindowGroup {
             MainView()
@@ -13,5 +12,11 @@ struct MyApp: App {
             ModeSelectView()
         }
         .windowResizability(.contentSize)
+
+        WindowGroup(id: "ControlPanel") {
+            IdeView()
+        }
+        .windowResizability(.contentSize)
+
     }
 }

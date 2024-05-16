@@ -7,9 +7,11 @@ struct MainView: View {
 
     @State private var showImmersiveSpace = false
     @State private var immersiveSpaceIsShown = false
+    @State private var windowShown = false
 
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+    @Environment(\.openWindow) var openControlPanel
 
     var body: some View {
         VStack {
@@ -29,6 +31,7 @@ struct MainView: View {
                     switch await openImmersiveSpace(id: "ImmersiveSpace") {
                     case .opened:
                         immersiveSpaceIsShown = true
+                        openControlPanel(id: "ControlPanel")
                     case .error, .userCancelled:
                         fallthrough
                     @unknown default:
