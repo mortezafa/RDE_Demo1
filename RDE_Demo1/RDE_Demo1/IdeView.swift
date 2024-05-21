@@ -3,19 +3,19 @@
 import SwiftUI
 
 struct IdeView: View {
-    @State private var cssText: String = ""
+    @State var IdeViewmodel = IdeViewModel()
 
     var body: some View {
         VStack {
             ZStack {
-                TextEditor(text: $cssText)
+                TextEditor(text: $IdeViewmodel.cssText)
                     .padding()
                     .font(.system(size: 15, design: .monospaced))
             }
 
-
             Button(action: {
-                // Action to convert CSS to JSON
+                IdeViewmodel.sendCSS()
+                print(IdeViewmodel.jsonResult )
             }) {
                 Text("Compile")
                     .buttonStyle(.borderedProminent)

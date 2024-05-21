@@ -6,31 +6,18 @@ struct ModeSelectView: View {
 
     @State private var imageTrackingProvider:ImageTrackingProvider?
     @State private var entityMap: [UUID: Entity] = [:]
-    @State private var contentEntity: Entity?
+    @State private var contentEntity: ModelEntity?
     private let session = ARKitSession()
     @State private var noteText = ""
-    @State private var noteVisible = false
+//    @State private var noteVisible = false
+    @State var IdeViewmodel: IdeViewModel
+    @State var color: UIColor = .brown
 
 
 
     var body: some View {
-
-        VStack {
-            Button(noteVisible ? "Remove Note" : "Add Note") {
-                noteVisible.toggle()
-            }
-            .padding()
-            .background(noteVisible ? Color.green : Color.gray)
-            .foregroundColor(.white)
-            .clipShape(Capsule())
-            .offset(z: -0.5)
-            .offset(y: -1000)
-        }
-
-
         RealityView { content, attachments in
             let mesh = MeshResource.generatePlane(width: 0.15748, height: 0.2286)
-            let color = UIColor.clear
             let material = SimpleMaterial(color: color, isMetallic: false)
             contentEntity = ModelEntity(mesh: mesh, materials: [material])
             content.add(contentEntity!)
@@ -43,8 +30,8 @@ struct ModeSelectView: View {
 
         } attachments: {
             Attachment(id: "NoteTitle") {
-                if noteVisible {
-                    VStack {
+                if IdeViewmodel.addNoteToObject() {
+                    ZStack {
                         TextEditor(text: $noteText)
                     }.frame(width: 250, height: 100)
                         .background(.thinMaterial)
@@ -56,9 +43,22 @@ struct ModeSelectView: View {
             await runSession()
             await processImageTrackingUpdates()
         }
+        .onChange(of: IdeViewmodel.shouldUpdate) {
+            print("ON CHANGE IS GETTING CALLED")
+            updateModelEntityColor()
+            IdeViewmodel.shouldUpdate = false
 
+        }
+    }
 
-
+    private func updateModelEntityColor() {
+        guard let contentEntity = contentEntity else { return }
+        let color = IdeViewmodel.getColor()?.withAlphaComponent(IdeViewmodel.addOpacity()) ?? UIColor.red.withAlphaComponent(0.2)
+        if var material = contentEntity.model?.materials.first as? SimpleMaterial {
+            material.color = .init(tint: color)
+            contentEntity.model?.materials = [material]
+            contentEntity.model?.materials.append(material)
+        }
     }
 
     func loadImage() async {
@@ -110,7 +110,4 @@ struct ModeSelectView: View {
     }
 }
 
-#Preview {
-    ModeSelectView()
-}
 
