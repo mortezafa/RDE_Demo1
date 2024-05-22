@@ -28,6 +28,13 @@ struct ModeSelectView: View {
 
             }
 
+            if let objectTitle = attachments.entity(for: "ObjectTitle") {
+                objectTitle.position = [0, 0, 0.01]
+
+                contentEntity!.addChild(objectTitle)
+
+            }
+
         } attachments: {
             Attachment(id: "NoteTitle") {
                 if IdeViewmodel.addNoteToObject() {
@@ -38,6 +45,17 @@ struct ModeSelectView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 6))
                 }
             }
+
+
+            Attachment(id: "ObjectTitle") {
+                VStack{
+                    Text(IdeViewmodel.getTitle() ?? "")
+                        .font(.title2)
+                    Text(IdeViewmodel.getDate() ?? "")
+                        .font(.title3)
+                }
+            }
+
         }.task {
             await loadImage()
             await runSession()

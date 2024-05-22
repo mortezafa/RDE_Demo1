@@ -16,6 +16,9 @@ enum JSONParsingError: Error {
     var cssText: String = ""
     var jsonResult: String = ""
     var shouldUpdate: Bool = false
+    var objectTitle: String = ""
+    var objectDate: String = ""
+
 
     func convertCSSToJSON(css: String) -> [String: Any] {
         var jsonDict: [String: Any] = [:]
@@ -110,6 +113,48 @@ enum JSONParsingError: Error {
         }
             return opacity
     }
+
+    func getTitle() -> String? {
+            guard let jsonData = jsonResult.data(using: .utf8) else {
+                print("Failed to convert jsonResult to Data.")
+                return nil
+            }
+
+            print("JSON Data: \(String(data: jsonData, encoding: .utf8) ?? "Invalid JSON Data")")
+
+            guard let jsonDict = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] else {
+                print("Failed to deserialize JSON data into a dictionary. FROM COLOR METHOD!")
+                return nil
+            }
+
+            guard let Title = jsonDict["Title"] as? String else {
+                print("Error with title string: \(jsonDict["title"] ?? "nil")")
+                return nil
+            }
+
+            return Title
+        }
+
+    func getDate() -> String? {
+            guard let jsonData = jsonResult.data(using: .utf8) else {
+                print("Failed to convert jsonResult to Data.")
+                return nil
+            }
+
+            print("JSON Data: \(String(data: jsonData, encoding: .utf8) ?? "Invalid JSON Data")")
+
+            guard let jsonDict = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] else {
+                print("Failed to deserialize JSON data into a dictionary. FROM COLOR METHOD!")
+                return nil
+            }
+
+            guard let date = jsonDict["Date"] as? String else {
+                print("Error with title string: \(jsonDict["Date"] ?? "nil")")
+                return nil
+            }
+
+            return date
+        }
 }
 
 
